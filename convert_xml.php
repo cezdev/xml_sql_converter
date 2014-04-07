@@ -2,8 +2,10 @@
 /*
 PHP script voor importeren van xml output files van NIA naar SQL-queries in DB 'inventory' - Tabel 'werkstations'
 */
+include 'header.php';
 
-echo "Start importeren XML bestand <br><br>";
+ini_set('display_error', 'On');
+
 // database connection vastleggen
 $connect = mysql_connect('localhost','root','toorandrej');
 if (!$connect) {
@@ -11,34 +13,52 @@ if (!$connect) {
 
 //database naam
 $selectdb = mysql_select_db("inventory",$connect);
-if (!$selectdb) { die('Database niet gevonden: ; ' . mysql_error()); }
-
-//echo "verbinding gemaakt met Inventory<br><br>";
-
-$scan =  simplexml_load_file('xml/custom_tabular_20140403_115946.xml');
-
-//echo "XML geupload <br><br>"
-
-//Loopen tot alle xmlregels zijn doorgevoerd
-foreach ($message as $message => $message) {
-	printf("OS     : %s\n", $OS_name->OS_name);
-	printf("CPU    : %s\n", $CPU->cpu);
-	printf("RAM    : %s\n",	$RAM->ram);
+if (!$selectdb) { 
+	die('Database niet gevonden: ; ' . mysql_error()); 
 }
 
-echo "XML regels doorgevoerd";
+echo "Database connectie tot stand gebracht . <br> ";
 
-//
-mysql_query("INSERT INTO werkstations
- (OS, CPU, RAM,) VALUES (\"$OS->OS\,")
- or die(mysql_error());
+// Lees bestandnamen in directory die eindigen op ".xml"
+$file_arr = array();
+if ($handle = opendir('.')) {
+    while (false !== ($file = readdir($handle))) {
+        if (($file != ".") && ($file != "..")) {
+            if(substr($file, -4) == ".xml")
+            {
+                array_push($file_arr, $file);
+            }
+        }
+    }
+    closedir($handle);
+}
 
-echo "Toegevoegd aan tabel werkstations<br>";
+//Loopen tot alle xmlregels zijn doorgevoerd
+foreach($file_arr as $filename)
+{
+	//simplexml load xml file
+	$mess = simplexml_load_file($filename);
+	echo "<br>XML is aanwezig <br> ";
 
-//Toon toevoegde database
-printf("Data bijgewerkt: %d\n", mysql_affected_rows());
+	$os 	= mysql_real_escape_string($mess->os);
+	$cpu 	= mysql_real_escape_string($mess->cpu);
+	$ram 	= mysql_real_escape_string($mess->ram);
+
+
+	echo "<br>XML regels ingevoerd <br> ";
+
+	// Voer gegevens in database
+	mysql_query("INSERT INTO xml (os, cpu, ram,)
+	 VALUES ('$os', '$cpu', '$ram')")
+	 or die(mysql_error());
+
+	echo "<br>Toegevoegd aan tabel xml <br> ";
+
+	//Toon toevoegde database
+	printf("Gegevens ingevoerd: %d\n", mysql_affected_rows());
 }
 
 //Verbreek verbinding met database
+mysql_close($connect);
 
-?>
+?>	

@@ -11,7 +11,7 @@ else
   echo "Type: " 		. $_FILES["file"]["type"] . "<br>";
   echo "Size: " 		. ($_FILES["file"]["size"] / 1024) . " kB<br>";
 
-   if (file_exists("xml/" . $_FILES["file"]["name"]))
+   if (file_exists("../" . $_FILES["file"]["name"]))
       {
       echo "XML-bestand - " . $_FILES["file"]["name"] . " bestaat al. ";
       }
@@ -19,11 +19,10 @@ else
       {
       move_uploaded_file($_FILES["file"]["tmp_name"],
       "xml/" . $_FILES["file"]["name"]);
-      echo "Opgeslagen in directory: " . "xml/" . $_FILES["file"]["name"];
+      echo "Opgeslagen in directory: " . "../" . $_FILES["file"]["name"];
       }
   }
 ?>
-echo <<<EOD
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css" />
@@ -37,4 +36,3 @@ echo <<<EOD
 
 </body>
 </html>
-EOD;
