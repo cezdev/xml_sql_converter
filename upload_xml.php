@@ -23,3 +23,18 @@ else
       }
   }
 ?>
+echo <<<EOD
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+<!-- Formulier voor het importen van xml-bestand --> 
+<form action="convert_xml.php" method="post">
+   <br> <input type="submit" name="submit" value="Convert gegevens naar database">
+</form>
+
+</body>
+</html>
+EOD;
