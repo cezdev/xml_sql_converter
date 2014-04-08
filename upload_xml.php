@@ -11,15 +11,15 @@ else
   echo "Type: " 		. $_FILES["file"]["type"] . "<br>";
   echo "Size: " 		. ($_FILES["file"]["size"] / 1024) . " kB<br>";
 
-   if (file_exists("../" . $_FILES["file"]["name"]))
+   if (file_exists("" . $_FILES["file"]["name"]))
       {
       echo "XML-bestand - " . $_FILES["file"]["name"] . " bestaat al. ";
       }
     else
       {
       move_uploaded_file($_FILES["file"]["tmp_name"],
-      "xml/" . $_FILES["file"]["name"]);
-      echo "Opgeslagen in directory: " . "../" . $_FILES["file"]["name"];
+      "" . $_FILES["file"]["name"]);
+      echo "Opgeslagen in directory: " . " " . $_FILES["file"]["name"];
       }
   }
 ?>
@@ -31,7 +31,8 @@ else
 <body>
 <!-- Formulier voor het importen van xml-bestand --> 
 <form action="convert_xml.php" method="post">
-   <br> <input type="submit" name="submit" value="Convert gegevens naar database">
+   <br> <input type="submit"          name="submit" value="Convert gegevens naar database">
+        <input action="index.php"  type="button"  value="Andere bestand uploaden">
 </form>
 
 </body>
