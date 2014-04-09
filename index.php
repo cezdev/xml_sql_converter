@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- 	<link rel="stylesheet" type="text/css" href="styles.css" />
- 	<link rel="shortcut icon" href="favicon.ico">
+ 	<link rel="stylesheet" type="text/css" href="./ccs/styles.css" />
+ 	<link rel="shortcut icon" href="./css/favicon.ico">
 	<title>XML Converter</title>
 </head>
 <body>
