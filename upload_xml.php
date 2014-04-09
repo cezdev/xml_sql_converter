@@ -32,8 +32,8 @@ else
 <!-- Formulier voor het importen van xml-bestand --> 
 <form action="convert_xml.php" method="post">
    <br> <input type="submit"       name="submit"  value="Convert gegevens naar database">
-        <input action="./index.php"  type="button"  value="Andere XML-bestand uploaden">
 </form>
+<a href="index.php"> <input type="submit" class="button" value="Ander XML-bestand uploaden"/>
 
 </body>
 </html>
