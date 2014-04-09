@@ -2,7 +2,7 @@
 /*
 PHP script voor importeren van xml output files van NIA naar SQL-queries in DB 'inventory' - Tabel 'werkstations'
 */
-include './include/header.php';
+include ('./include/header.php');
 
 ini_set('display_error', 'On');
 

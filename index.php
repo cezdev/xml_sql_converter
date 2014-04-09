@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- 	<link rel="stylesheet" type="text/css" href="./ccs/styles.css" />
+ 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
  	<link rel="shortcut icon" href="./css/favicon.ico">
 	<title>XML Converter</title>
 </head>

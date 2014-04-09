@@ -1,5 +1,5 @@
 <?php 
-include 'header.php';
+include './include/header.php';
 
 if ($_FILES["file"]["error"] > 0)
   {
@@ -25,13 +25,13 @@ else
 ?>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="styles.css" />
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="shortcut icon" href="css/favicon.ico">
 </head>
 <body>
 <!-- Formulier voor het importen van xml-bestand --> 
 <form action="convert_xml.php" method="post">
-   <br> <input type="submit"          name="submit" value="Convert gegevens naar database">
+   <br> <input type="submit"       name="submit" value="Convert gegevens naar database">
         <input action="index.php"  type="button"  value="Andere bestand uploaden">
 </form>
 
