@@ -1,5 +1,5 @@
 <?php 
-include './include/header.php';
+include ('./include/header.php');
 
 if ($_FILES["file"]["error"] > 0)
   {
@@ -31,8 +31,8 @@ else
 <body>
 <!-- Formulier voor het importen van xml-bestand --> 
 <form action="convert_xml.php" method="post">
-   <br> <input type="submit"       name="submit" value="Convert gegevens naar database">
-        <input action="index.php"  type="button"  value="Andere bestand uploaden">
+   <br> <input type="submit"       name="submit"  value="Convert gegevens naar database">
+        <input action="./index.php"  type="button"  value="Andere XML-bestand uploaden">
 </form>
 
 </body>
