@@ -48,17 +48,21 @@ foreach($file_arr as $filename)
 	echo "<br>XML regels ingevoerd <br> ";
 
 	// Voer gegevens in database
-	mysql_query("INSERT INTO xml (os, cpu, ram,)
+	mysql_query("INSERT INTO werkstations (os, cpu, ram)
 	 VALUES ('$os', '$cpu', '$ram')")
 	 or die(mysql_error());
 
-	echo "<br>Toegevoegd aan tabel xml <br> ";
+	echo "<br>Toegevoegd aan tabel werkstations <br> ";
 
 	//Toon toevoegde database
-	printf("Gegevens ingevoerd: %d\n", mysql_affected_rows());
+	printf("<br>Aantal rij(en) toegevoegd : %d\n", mysql_affected_rows());
+	
+
+	echo"<br><tr><td><br>$os</br></td><td><br>$cpu</br></td><td><br>$ram</br></td></tr></br>";
+
 }
 
 //Verbreek verbinding met database
 mysql_close($connect);
 
-?>	
+?>
