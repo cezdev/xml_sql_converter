@@ -40,6 +40,7 @@ foreach($file_arr as $filename)
 	$mess = simplexml_load_file($filename);
 	echo "<br>XML is aanwezig <br> ";
 
+	$item 	= mysql_real_escape_string($item);
 	$os 	= mysql_real_escape_string($mess->os);
 	$cpu 	= mysql_real_escape_string($mess->cpu);
 	$ram 	= mysql_real_escape_string($mess->ram);
