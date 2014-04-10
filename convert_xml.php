@@ -40,17 +40,32 @@ foreach($file_arr as $filename)
 	$mess = simplexml_load_file($filename);
 	echo "<br>XML is aanwezig <br> ";
 
-	$item 	= mysql_real_escape_string($item);
-	$os 	= mysql_real_escape_string($mess->os);
-	$cpu 	= mysql_real_escape_string($mess->cpu);
-	$ram 	= mysql_real_escape_string($mess->ram);
+	$timestamp  				= mysql_real_escape_string($mess->TIMESTAMP);
+	$network					= mysql_real_escape_string($mess->NETWORK);
+	$n 							= mysql_real_escape_string($mess->n);
+	$node_name  				= mysql_real_escape_string($mess->Node_name);
+	$manufacturer				= mysql_real_escape_string($mess->Manufacturer);
+	$model						= mysql_real_escape_string($mess->Model);
+	$os_name 					= mysql_real_escape_string($mess->OS_name);
+	$windows_serial_number		= mysql_real_escape_string($mess->Windows_serial_number);
+	$cpu 						= mysql_real_escape_string($mess->cpu);
+	$freezit_id					= mysql_real_escape_string($mess->FreezIT_ID);
+	$ip_address					= mysql_real_escape_string($mess->IP_address);
+	$gpu						= mysql_real_escape_string($mess->Video_adapter);
+	$ram 						= mysql_real_escape_string($mess->ram);
+	$hdd						= mysql_real_escape_string($mess->Hdd_caption);
+	$MSOffice_pkey				= mysql_real_escape_string($mess->MS_Office_product_key);
+	$MSOffice_edition			= mysql_real_escape_string($mess->MS_Office_edition);
+	$LD_free_space				= mysql_real_escape_string($mess->LogicalDisk_FreSpacePer);
 
 
 	echo "<br>XML regels ingevoerd <br> ";
 
 	// Voer gegevens in database
-	mysql_query("INSERT INTO werkstations (os, cpu, ram)
-	 VALUES ('$os', '$cpu', '$ram')")
+	mysql_query("INSERT INTO werkstations (TIMESTAMP, network, n, Node_name, Manufacturer, Model, OS_name, Windows_serial_number, cpu,
+		FreezIT_ID, IP_address, Video_adapter, ram, Hdd_caption, MS_Office_product_key, MS_Office_edition, LogicalDisk_FreSpacePer )
+	 VALUES ('$timestamp','$network', '$n', '$node_name', '$manufacturer', '$model', '$os_name', '$windows_serial_number', '$cpu', '$freezit_id',
+	 	'$ip_address', '$gpu', '$ram', '$hdd', '$MSOffice_pkey', '$MSOffice_edition', $LD_free_space)")
 	 or die(mysql_error());
 
 	echo "<br>Toegevoegd aan tabel werkstations <br> ";
