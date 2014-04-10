@@ -4,7 +4,6 @@ PHP script voor importeren van xml output files van NIA naar SQL-queries in DB '
 */
 include ('./include/header.php');
 
-ini_set('display_error', 'On');
 
 // database connection vastleggen
 $connect = mysql_connect('localhost','root','toorandrej');
@@ -40,7 +39,7 @@ foreach($file_arr as $filename)
 	$mess = simplexml_load_file($filename);
 	echo "<br>XML is aanwezig <br> ";
 
-	$timestamp  				= mysql_real_escape_string($mess->TIMESTAMP);
+	//$timestamp  				= mysql_real_escape_string($mess->TIMESTAMP);
 	$network					= mysql_real_escape_string($mess->NETWORK);
 	$n 							= mysql_real_escape_string($mess->n);
 	$node_name  				= mysql_real_escape_string($mess->Node_name);
@@ -53,7 +52,7 @@ foreach($file_arr as $filename)
 	$ip_address					= mysql_real_escape_string($mess->IP_address);
 	$gpu						= mysql_real_escape_string($mess->Video_adapter);
 	$ram 						= mysql_real_escape_string($mess->ram);
-	$hdd						= mysql_real_escape_string($mess->Hdd_caption);
+	$hdd						= mysql_real_escape_string($mess->Hdd_Caption);
 	$MSOffice_pkey				= mysql_real_escape_string($mess->MS_Office_product_key);
 	$MSOffice_edition			= mysql_real_escape_string($mess->MS_Office_edition);
 	$LD_free_space				= mysql_real_escape_string($mess->LogicalDisk_FreSpacePer);
@@ -62,10 +61,10 @@ foreach($file_arr as $filename)
 	echo "<br>XML regels ingevoerd <br> ";
 
 	// Voer gegevens in database
-	mysql_query("INSERT INTO werkstations (TIMESTAMP, network, n, Node_name, Manufacturer, Model, OS_name, Windows_serial_number, cpu,
-		FreezIT_ID, IP_address, Video_adapter, ram, Hdd_caption, MS_Office_product_key, MS_Office_edition, LogicalDisk_FreSpacePer )
-	 VALUES ('$timestamp','$network', '$n', '$node_name', '$manufacturer', '$model', '$os_name', '$windows_serial_number', '$cpu', '$freezit_id',
-	 	'$ip_address', '$gpu', '$ram', '$hdd', '$MSOffice_pkey', '$MSOffice_edition', $LD_free_space)")
+	mysql_query("INSERT INTO xml (network, n, Node_name, Manufacturer, Model, OS_name, Windows_serial_number, cpu,
+		FreezIT_ID, IP_address, Video_adapter, ram, hdd_caption, MS_Office_product_key, MS_Office_edition, LD_free_space )
+	 VALUES ('$network', '$n', '$node_name', '$manufacturer', '$model', '$os_name', '$windows_serial_number', '$cpu', '$freezit_id',
+	 	'$ip_address', '$gpu', '$ram', '$hdd', '$MSOffice_pkey', '$MSOffice_edition', '$LD_free_space')")
 	 or die(mysql_error());
 
 	echo "<br>Toegevoegd aan tabel werkstations <br> ";
@@ -74,7 +73,7 @@ foreach($file_arr as $filename)
 	printf("<br>Aantal rij(en) toegevoegd : %d\n", mysql_affected_rows());
 	
 
-	echo"<br><tr><td><br>$os</br></td><td><br>$cpu</br></td><td><br>$ram</br></td></tr></br>";
+	echo"<br><tr><td><br>$os_name</br></td><td><br>$cpu</br></td><td><br>$ram</br></td></tr></br>";
 
 }
 
@@ -82,3 +81,4 @@ foreach($file_arr as $filename)
 mysql_close($connect);
 
 ?>
+<html><a href="index.php"> <input type="submit" class="button" value="Ander XML-bestand uploaden"/></html>
