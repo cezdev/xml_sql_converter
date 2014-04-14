@@ -70,15 +70,21 @@ foreach($file_arr as $filename)
 	echo "<br>Toegevoegd aan tabel werkstations <br> ";
 
 	//Toon toevoegde database
-	printf("<br>Aantal rij(en) toegevoegd : %d\n", mysql_affected_rows());
+	printf("<br>Aantal rij(en) gevuld : %d\n", mysql_affected_rows());
 	
 
-	echo"<br><tr>
-			<td><br>$os_name</br></td>
-			<td><br>$cpu	</br></td>
-			<td><br>$gpu	</br></td>
-			<td><br>$ram	</br></td>
-		</tr></br>";
+//<<<EOT
+echo "	<br><tr>
+			<br>Gegevens die zijn toegevoegd |</br>
+			<td><br>IP  : $ip_address   </br></td>
+			<td><br>MDL : $model  		</br></td>
+			<td><br>OS  : $os_name  	</br></td>
+			<td><br>CPU : $cpu			</br></td>
+			<td><br>GPU : $gpu			</br></td>
+			<td><br>RAM : $ram			</br></td>
+			<td><br>HDD : $hdd  		</br></td>
+	</tr></br>";
+//EOT;
 
 }
 
