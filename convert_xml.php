@@ -61,8 +61,8 @@ foreach($file_arr as $filename)
 	echo "<br>XML regels ingevoerd <br> ";
 
 	// Voer gegevens in database
-	mysql_query("INSERT INTO xml (network, n, Node_name, Manufacturer, Model, OS_name, Windows_serial_number, cpu,
-		FreezIT_ID, IP_address, Video_adapter, ram, hdd_caption, MS_Office_product_key, MS_Office_edition, LD_free_space )
+	mysql_query("INSERT INTO xml (network, n, Node_name, Manufacturer, Model, os, Windows_serial_number, cpu,
+		FreezIT_ID, IP_address, gpu, ram, hdd_caption, MS_Office_product_key, MS_Office_edition, LD_free_space )
 	 VALUES ('$network', '$n', '$node_name', '$manufacturer', '$model', '$os_name', '$windows_serial_number', '$cpu', '$freezit_id',
 	 	'$ip_address', '$gpu', '$ram', '$hdd', '$MSOffice_pkey', '$MSOffice_edition', '$LD_free_space')")
 	 or die(mysql_error());
@@ -73,7 +73,12 @@ foreach($file_arr as $filename)
 	printf("<br>Aantal rij(en) toegevoegd : %d\n", mysql_affected_rows());
 	
 
-	echo"<br><tr><td><br>$os_name</br></td><td><br>$cpu</br></td><td><br>$ram</br></td></tr></br>";
+	echo"<br><tr>
+			<td><br>$os_name</br></td>
+			<td><br>$cpu	</br></td>
+			<td><br>$gpu	</br></td>
+			<td><br>$ram	</br></td>
+		</tr></br>";
 
 }
 
