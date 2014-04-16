@@ -4,7 +4,6 @@ PHP script voor importeren van xml output files van NIA naar SQL-queries in DB '
 */
 include ('./include/header.php');
 
-ini_set('display_error', 'On');
 
 // database connection vastleggen
 $connect = mysql_connect('localhost','root','toorandrej');
@@ -40,25 +39,51 @@ foreach($file_arr as $filename)
 	$mess = simplexml_load_file($filename);
 	echo "<br>XML is aanwezig <br> ";
 
-	$os 	= mysql_real_escape_string($mess->os);
-	$cpu 	= mysql_real_escape_string($mess->cpu);
-	$ram 	= mysql_real_escape_string($mess->ram);
+	$network					= mysql_real_escape_string($mess->tabular->item->NETWORK);
+	$n 							= mysql_real_escape_string($mess->tabular->item->n);
+	$node_name  				= mysql_real_escape_string($mess->tabular->item->Node_name);
+	$manufacturer				= mysql_real_escape_string($mess->tabular->item->Manufacturer);
+	$model						= mysql_real_escape_string($mess->tabular->item->Model);
+	$os_name 					= mysql_real_escape_string($mess->tabular->item->OS_name);
+	$windows_serial_number		= mysql_real_escape_string($mess->tabular->item->Windows_serial_number);
+	$cpu 						= mysql_real_escape_string($mess->tabular->item->cpu);
+	$freezit_id					= mysql_real_escape_string($mess->tabular->item->FreezIT_ID);
+	$ip_address					= mysql_real_escape_string($mess->tabular->item->IP_address);
+	$gpu						= mysql_real_escape_string($mess->tabular->item->Video_adapter);
+	$ram 						= mysql_real_escape_string($mess->tabular->item->ram);
+	$hdd						= mysql_real_escape_string($mess->tabular->item->Hdd_Caption);
+	$MSOffice_pkey				= mysql_real_escape_string($mess->tabular->item->MS_Office_product_key);
+	$MSOffice_edition			= mysql_real_escape_string($mess->tabular->item->MS_Office_edition);
+	$LD_free_space				= mysql_real_escape_string($mess->tabular->item->LogicalDisk_FreSpacePer);
 
 
 	echo "<br>XML regels ingevoerd <br> ";
 
 	// Voer gegevens in database
-	mysql_query("INSERT INTO werkstations (os, cpu, ram)
-	 VALUES ('$os', '$cpu', '$ram')")
+	mysql_query("INSERT INTO xml (network, n, Node_name, Manufacturer, Model, os, Windows_serial_number, cpu,
+		FreezIT_ID, IP_address, gpu, ram, hdd_caption, MS_Office_product_key, MS_Office_edition, LD_free_space )
+	 VALUES ('$network', '$n', '$node_name', '$manufacturer', '$model', '$os_name', '$windows_serial_number', '$cpu', '$freezit_id',
+	 	'$ip_address', '$gpu', '$ram', '$hdd', '$MSOffice_pkey', '$MSOffice_edition', '$LD_free_space')")
 	 or die(mysql_error());
 
 	echo "<br>Toegevoegd aan tabel werkstations <br> ";
 
 	//Toon toevoegde database
-	printf("<br>Aantal rij(en) toegevoegd : %d\n", mysql_affected_rows());
+	printf("<br>Aantal rij(en) gevuld : %d\n", mysql_affected_rows());
 	
 
-	echo"<br><tr><td><br>$os</br></td><td><br>$cpu</br></td><td><br>$ram</br></td></tr></br>";
+//<<<EOT
+echo "	<br><tr>
+			<br>Gegevens die zijn toegevoegd |</br>
+			<td><br>IP  : $ip_address   </br></td>
+			<td><br>MDL : $model  		</br></td>
+			<td><br>OS  : $os_name  	</br></td>
+			<td><br>CPU : $cpu			</br></td>
+			<td><br>GPU : $gpu			</br></td>
+			<td><br>RAM : $ram			</br></td>
+			<td><br>HDD : $hdd  		</br></td>
+	</tr></br>";
+//EOT;
 
 }
 
@@ -66,3 +91,4 @@ foreach($file_arr as $filename)
 mysql_close($connect);
 
 ?>
+<html><a href="index.php"> <input type="submit" class="button" value="Ander XML-bestand uploaden"/></html>
