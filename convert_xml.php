@@ -39,23 +39,22 @@ foreach($file_arr as $filename)
 	$mess = simplexml_load_file($filename);
 	echo "<br>XML is aanwezig <br> ";
 
-	//$timestamp  				= mysql_real_escape_string($mess->TIMESTAMP);
-	$network					= mysql_real_escape_string($mess->NETWORK);
-	$n 							= mysql_real_escape_string($mess->n);
-	$node_name  				= mysql_real_escape_string($mess->Node_name);
-	$manufacturer				= mysql_real_escape_string($mess->Manufacturer);
-	$model						= mysql_real_escape_string($mess->Model);
-	$os_name 					= mysql_real_escape_string($mess->OS_name);
-	$windows_serial_number		= mysql_real_escape_string($mess->Windows_serial_number);
-	$cpu 						= mysql_real_escape_string($mess->cpu);
-	$freezit_id					= mysql_real_escape_string($mess->FreezIT_ID);
-	$ip_address					= mysql_real_escape_string($mess->IP_address);
-	$gpu						= mysql_real_escape_string($mess->Video_adapter);
-	$ram 						= mysql_real_escape_string($mess->ram);
-	$hdd						= mysql_real_escape_string($mess->Hdd_Caption);
-	$MSOffice_pkey				= mysql_real_escape_string($mess->MS_Office_product_key);
-	$MSOffice_edition			= mysql_real_escape_string($mess->MS_Office_edition);
-	$LD_free_space				= mysql_real_escape_string($mess->LogicalDisk_FreSpacePer);
+	$network					= mysql_real_escape_string($mess->tabular->item->NETWORK);
+	$n 							= mysql_real_escape_string($mess->tabular->item->n);
+	$node_name  				= mysql_real_escape_string($mess->tabular->item->Node_name);
+	$manufacturer				= mysql_real_escape_string($mess->tabular->item->Manufacturer);
+	$model						= mysql_real_escape_string($mess->tabular->item->Model);
+	$os_name 					= mysql_real_escape_string($mess->tabular->item->OS_name);
+	$windows_serial_number		= mysql_real_escape_string($mess->tabular->item->Windows_serial_number);
+	$cpu 						= mysql_real_escape_string($mess->tabular->item->cpu);
+	$freezit_id					= mysql_real_escape_string($mess->tabular->item->FreezIT_ID);
+	$ip_address					= mysql_real_escape_string($mess->tabular->item->IP_address);
+	$gpu						= mysql_real_escape_string($mess->tabular->item->Video_adapter);
+	$ram 						= mysql_real_escape_string($mess->tabular->item->ram);
+	$hdd						= mysql_real_escape_string($mess->tabular->item->Hdd_Caption);
+	$MSOffice_pkey				= mysql_real_escape_string($mess->tabular->item->MS_Office_product_key);
+	$MSOffice_edition			= mysql_real_escape_string($mess->tabular->item->MS_Office_edition);
+	$LD_free_space				= mysql_real_escape_string($mess->tabular->item->LogicalDisk_FreSpacePer);
 
 
 	echo "<br>XML regels ingevoerd <br> ";
