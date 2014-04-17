@@ -1,5 +1,5 @@
 <?php 
-include ('./include/header.php');
+include ('./include/include.php');
 
 if ($_FILES["file"]["error"] > 0)
   {
